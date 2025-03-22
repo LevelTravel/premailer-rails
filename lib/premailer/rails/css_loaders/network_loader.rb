@@ -6,7 +6,7 @@ class Premailer
 
         def load(url)
           uri = uri_for_url(url)
-          Net::HTTP.get(uri, { 'Accept' => 'text/css' }) if uri
+          Net::HTTP.get(uri) if uri
         end
 
         def uri_for_url(url)
@@ -14,7 +14,7 @@ class Premailer
 
           if uri.host.present?
             return uri if uri.scheme.present?
-            URI("http:#{uri.to_s}")
+            URI("http:#{uri}")
           elsif asset_host_present?
             scheme, host = asset_host(url).split(%r{:?//})
             scheme, host = host, scheme if host.nil?
