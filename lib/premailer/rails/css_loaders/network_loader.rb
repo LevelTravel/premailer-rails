@@ -14,7 +14,7 @@ class Premailer
 
           if uri.host.present?
             return uri if uri.scheme.present?
-            URI("http:#{uri}")
+            URI("http:#{uri.to_s}")
           elsif asset_host_present?
             scheme, host = asset_host(url).split(%r{:?//})
             scheme, host = host, scheme if host.nil?
